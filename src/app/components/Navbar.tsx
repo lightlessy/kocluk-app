@@ -93,7 +93,7 @@ export default function Navbar() {
         style={{ zIndex: 40 }}
       >
         <div className="flex flex-col space-y-6">
-          {['/hizmetler', '/haftaningorevi', '/blog', '/iletisim'].map((href, idx) => (
+          {['/hizmetler', '/haftaningorevi', '/blog', '/iletisim'].map(href => (
             <Link
               key={href}
               href={href}

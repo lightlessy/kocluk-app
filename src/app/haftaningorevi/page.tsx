@@ -1,4 +1,3 @@
-import Image from "next/image";
 import InteractiveCounter from '../components/InteractiveCounter';
 import "./haftaningorevi.css";
 import WhatsAppCTA from '../components/WhatsAppCTA';
