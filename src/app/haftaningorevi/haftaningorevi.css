@@ -1,0 +1,15 @@
+.konuListesi {
+  list-style:lower-latin; /* Liste işaretlerini kaldır */
+  padding: 0;
+}
+
+.konu-listesi li {
+  padding: 8px 12px;
+  border-radius: 6px;
+  transition: background-color 0.3s ease; /* Sadece arkaplan geçişi */
+}
+
+/* Fare üzerine gelince sadece arkaplan rengi değişir, metin rengi sabit kalır */
+.konu-listesi li:hover {
+  background-color:rgba(73, 97, 119, 0.418); /* Kullanıcıya "buraya odaklandın" der, "bana tıkla" demez */
+}

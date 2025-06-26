@@ -1,0 +1,55 @@
+.sayacContainer {
+  background-color: #000000;
+  border-radius: 32px;
+  padding: 20px;
+  text-align: center;
+  margin: -10px ;
+  font-family: sans-serif;
+}
+/* ... Önceki yanıttaki CSS kodunun geri kalanını buraya kopyalayın ... */
+.sayacContainer h3 {
+  margin-top: 0;
+  color: #6d6363;
+}
+
+.progressBarDis {
+  background-color: #303030;
+  border-radius: 10px;
+  height: 20px;
+  width: 100%;
+}
+
+.progressBarIc {
+  background-color: #F97316; /* Vurgu rengi (Mavi) */
+  height: 100%;
+  border-radius: 10px;
+  width: 100%; /* Başlangıçta %100 dolu */
+  transition: width 0.5s ease-in-out, background-color 0.5s; /* Animasyonlu geçiş */
+}
+
+.progressBarIc.tehlike {
+    background-color: #F97316; /* Turuncu renk */
+}
+
+.rakamlar {
+  color: aquamarine;
+  display: flex;
+  justify-content: space-around;
+  margin-top: 15px;
+}
+
+.rakamlar div {
+  display: flex;
+  flex-direction: column;
+}
+
+.rakamlar span {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #f9741661;
+}
+
+.rakamlar small {
+  font-size: 0.9rem;
+  color: #888;
+}
