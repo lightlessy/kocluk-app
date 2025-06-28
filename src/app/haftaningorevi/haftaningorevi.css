@@ -1,15 +1,70 @@
-.konuListesi {
-  list-style:lower-latin; /* Liste işaretlerini kaldır */
-  padding: 0;
+.header-container {
+  position: relative;
+  background: #0f172a; /* bg-slate-900 */
 }
 
-.konu-listesi li {
-  padding: 8px 12px;
-  border-radius: 6px;
-  transition: background-color 0.3s ease; /* Sadece arkaplan geçişi */
+@keyframes gradient-x {
+  0%,
+  100% {
+    background-size: 200% 200%;
+    background-position: left center;
+  }
+  50% {
+    background-size: 200% 200%;
+    background-position: right center;
+  }
 }
 
-/* Fare üzerine gelince sadece arkaplan rengi değişir, metin rengi sabit kalır */
-.konu-listesi li:hover {
-  background-color:rgba(73, 97, 119, 0.418); /* Kullanıcıya "buraya odaklandın" der, "bana tıkla" demez */
+.animate-gradient-x {
+  animation: gradient-x 5s ease infinite;
 }
+
+.task-card {
+    background-color: #1f2937; /* bg-slate-800 */
+    border-radius: 12px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  
+  .task-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2), 0 0 15px rgba(76, 175, 80, 0.3);
+  }
+  
+  .task-card h3 {
+    color: #818cf8; /* text-indigo-400 */
+  }
+  
+  .task-card p {
+    color: #cbd5e1; /* text-slate-300 */
+  }
+  
+  .task-card iframe {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+  
+  .task-card button {
+    background: linear-gradient(to right, #2563eb, #1d4ed8);
+    color: white;
+    padding: 12px 24px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    font-weight: 600;
+  }
+  
+  .task-card button:hover {
+    background: linear-gradient(to right, #1d4ed8, #1e3a8a);
+    transform: scale(1.05);
+  }
+  
