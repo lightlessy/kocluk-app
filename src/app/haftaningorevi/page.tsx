@@ -1,6 +1,6 @@
 import InteractiveCounter from '../components/InteractiveCounter';
 import WhatsAppCTA from '../components/WhatsAppCTA';
-import { FiTarget, FiYoutube, FiCheckCircle } from 'react-icons/fi'; // İkonları ekliyoruz
+import { FiTarget,git FiCheckCircle } from 'react-icons/fi'; // İkonları ekliyoruz
 import './haftaningorevi.css';
 
 // Örnek konu ve video verileri
