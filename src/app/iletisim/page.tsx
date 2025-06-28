@@ -35,7 +35,7 @@ export default function IletisimPage() {
       }
     } catch (error) {
       setStatus('error');
-      setResponseMessage('Bir ağ hatası oluştu. Lütfen tekrar deneyin.');
+      setResponseMessage('Bir ağ hatası oluştu. Lütfen tekrar deneyin.' + error);
     }
   };
 
