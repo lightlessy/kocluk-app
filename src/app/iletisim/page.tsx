@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { FiSend, FiMail, FiPhone, FiMapPin, FiLoader, FiCheckCircle, FiAlertTriangle } from 'react-icons/fi';
+import { FiSend, FiLoader, FiCheckCircle, FiAlertTriangle } from 'react-icons/fi';
 
 export default function IletisimPage() {
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
