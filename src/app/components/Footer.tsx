@@ -135,7 +135,7 @@ export default function Footer() {
           onContextMenu={(e) => e.preventDefault()}
         >
           <p>&copy; {new Date().getFullYear()} YKS Koçluk. Tüm hakları saklıdır.</p>
-          <p className="easter-egg-hint">PC'de 'mola'  yaz veya mobilde bu yazıya 5 kez dokun.</p>
+          <p className="easter-egg-hint">PC&#39;de &#39;mola&#39;  yaz veya mobilde bu yazıya 5 kez dokun.</p>
         </div>
       </footer>
 

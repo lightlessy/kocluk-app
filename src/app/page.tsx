@@ -16,7 +16,7 @@ export default function HomePage() {
           Zirveye Giden Yolda Rehberin
         </h1>
         <p className="text-lg md:text-xl text-slate-300 max-w-2xl mx-auto mb-8">
-          YKS'de hedeflerine ulaşman için ihtiyacın olan strateji, motivasyon ve birebir ilgi burada. Potansiyelini ortaya çıkar, başarıyı yakala.
+          YKS&#39;de hedeflerine ulaşman için ihtiyacın olan strateji, motivasyon ve birebir ilgi burada. Potansiyelini ortaya çıkar, başarıyı yakala.
         </p>
         <div className="flex justify-center gap-4">
           <Link href="/haftaningorevi" className="px-8 py-3 font-bold text-white bg-blue-600 rounded-full hover:bg-blue-700 transition-transform transform hover:scale-105 shadow-lg">
