@@ -19,6 +19,30 @@
   animation: gradient-x 5s ease infinite;
 }
 
+.selection-button {
+  display: flex;
+  align-items: center;
+  padding: 10px 20px;
+  border-radius: 9999px; /* rounded-full */
+  border: none;
+  background-color: transparent;
+  color: #cbd5e1; /* text-slate-300 */
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  margin: 0 4px;
+}
+
+.selection-button.active {
+  background-color: #3b82f6; /* bg-blue-600 */
+  color: white;
+  box-shadow: 0 0 15px rgba(59, 130, 246, 0.5);
+}
+
+.selection-button:not(.active):hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
 .task-card {
     background-color: #1f2937; /* bg-slate-800 */
     border-radius: 12px;

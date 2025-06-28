@@ -1,72 +1,32 @@
-import Image from "next/image";
+import Link from 'next/link';
 
-export default function Hizmetler() {
+export default function HomePage() {
   return (
-    <div className="max-w-4xl mx-auto p-6">
-      <h1 className="text-3xl font-bold mb-6">Hizmetlerimiz</h1>
-      <p className="mb-8">
-        Yaşam koçluğu, kariyer planlama, stres yönetimi ve daha fazlası...
-      </p>
-      
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div className="p-4 bg-gray-900 rounded-lg shadow-md">
-          <Image
-            src="/images/goc.jpg"
-            alt="Yaşam Koçluğu"
-            width={500}
-            height={300}
-            className="rounded-lg object-cover"
-          />
-          <h2 className="text-xl font-bold mt-4">Yaşam Koçluğu</h2>
-          <p className="mt-2">
-            Bireylerin hedeflerine ulaşmalarına yardımcı olmak için kişisel
-            gelişim ve motivasyon teknikleri.
-          </p>
-        </div>
-
-        <div className="p-4 bg-gray-900 rounded-lg shadow-md">
-          <Image
-            src="/images/goc.jpg"
-            alt="Kariyer Planlama"
-            width={500}
-            height={300}
-            className="rounded-lg object-cover"
-          />
-          <h2 className="text-xl font-bold mt-4">Kariyer Planlama</h2>
-          <p className="mt-2">
-            Kariyer hedeflerinizi belirlemenize ve bu hedeflere ulaşmanıza
-            yardımcı olacak stratejiler.
-          </p>
-        </div>
-
-         <div className="p-4 bg-gray-900 rounded-lg shadow-md">
-          <Image
-            src="/images/goc.jpg"
-            alt="Kariyer Planlama"
-            width={500}
-            height={300}
-            className="rounded-lg object-cover"
-          />
-          <h2 className="text-xl font-bold mt-4">Kariyer Planlama</h2>
-          <p className="mt-2">
-            Kariyer hedeflerinizi belirlemenize ve bu hedeflere ulaşmanıza
-            yardımcı olacak stratejiler.
-          </p>
-        </div>
-
-
+    <main className="relative min-h-screen flex items-center justify-center overflow-hidden bg-slate-900 text-white">
+      {/* Arka Plan Efektleri */}
+      <div className="absolute inset-0 z-0">
+        <div className="absolute top-0 left-0 w-72 h-72 bg-blue-600 rounded-full mix-blend-screen filter blur-3xl opacity-30 animate-blob"></div>
+        <div className="absolute top-0 right-0 w-72 h-72 bg-purple-600 rounded-full mix-blend-screen filter blur-3xl opacity-30 animate-blob animation-delay-2000"></div>
+        <div className="absolute bottom-20 left-1/4 w-72 h-72 bg-pink-600 rounded-full mix-blend-screen filter blur-3xl opacity-30 animate-blob animation-delay-4000"></div>
       </div>
-   
-   
-   
-   
-    </div>
 
-    
+      {/* Ana İçerik */}
+      <div className="relative z-10 text-center p-4">
+        <h1 className="text-5xl md:text-7xl font-extrabold leading-tight mb-4 bg-clip-text text-transparent bg-gradient-to-r from-blue-300 via-purple-300 to-pink-300">
+          Zirveye Giden Yolda Rehberin
+        </h1>
+        <p className="text-lg md:text-xl text-slate-300 max-w-2xl mx-auto mb-8">
+          YKS'de hedeflerine ulaşman için ihtiyacın olan strateji, motivasyon ve birebir ilgi burada. Potansiyelini ortaya çıkar, başarıyı yakala.
+        </p>
+        <div className="flex justify-center gap-4">
+          <Link href="/haftaningorevi" className="px-8 py-3 font-bold text-white bg-blue-600 rounded-full hover:bg-blue-700 transition-transform transform hover:scale-105 shadow-lg">
+            Hemen Başla
+          </Link>
+          <Link href="/hizmetler" className="px-8 py-3 font-bold text-slate-200 bg-slate-700/50 border border-slate-600 rounded-full hover:bg-slate-700 transition-transform transform hover:scale-105 shadow-lg">
+            Daha Fazlası
+          </Link>
+        </div>
+      </div>
+    </main>
   );
 }
-
-export const metadata = {
-  title: 'Hizmetlerimiz - Koçluk Sitesi',
-  description: 'Yaşam koçluğu, kariyer planlama ve daha fazlası...',
-};

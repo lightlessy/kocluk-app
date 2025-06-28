@@ -1,0 +1,51 @@
+@keyframes pulse-glow {
+    0%, 100% {
+      box-shadow: 0 0 20px rgba(59, 130, 246, 0.3), 0 0 30px rgba(168, 85, 247, 0.2);
+    }
+    50% {
+      box-shadow: 0 0 35px rgba(59, 130, 246, 0.5), 0 0 45px rgba(168, 85, 247, 0.3);
+    }
+  }
+  
+  .whatsapp-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    border-radius: 9999px; /* rounded-full */
+    position: relative;
+    overflow: hidden;
+    
+    /* --- Glassmorphism --- */
+    background-color: rgba(29, 41, 59, 0.5); /* bg-slate-800/50 */
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    
+    color: white;
+    text-decoration: none;
+    
+    /* --- Transitions --- */
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    
+    /* --- Pulse Animation --- */
+    animation: pulse-glow 4s infinite ease-in-out;
+  }
+  
+  .whatsapp-button:hover {
+    transform: scale(1.08);
+    padding-right: 24px;
+    padding-left: 24px;
+    background-color: rgba(42, 56, 78, 0.7);
+    animation-play-state: paused; /* Hover anında ana animasyonu durdur */
+    box-shadow: 0 0 30px rgba(59, 130, 246, 0.6), 0 0 45px rgba(168, 85, 247, 0.4);
+  }
+  
+  .whatsapp-button .icon-transition {
+    transition: transform 0.3s ease;
+  }
+  
+  .whatsapp-button:hover .icon-transition {
+    transform: rotate(-15deg);
+  }
+  
