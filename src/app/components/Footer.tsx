@@ -1,9 +1,10 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
-import { FaInstagram, FaTwitter, FaYoutube } from 'react-icons/fa';
+import { FaInstagram, FaTwitter, FaWhatsapp, FaYoutube } from 'react-icons/fa';
 import { FiUsers, FiCheckSquare } from 'react-icons/fi';
 import './Footer.css';
+import { FaSwatchbook } from 'react-icons/fa6';
 
 const academicSymbols = 'Σ∫π√αβθλ∞ωμψABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
 
@@ -127,6 +128,8 @@ export default function Footer() {
             <a href="#" className="social-link"><FaInstagram /></a>
             <a href="#" className="social-link"><FaTwitter /></a>
             <a href="#" className="social-link"><FaYoutube /></a>
+            <a href="#" className="social-link"><FaWhatsapp /></a>
+
           </div>
         </div>
         <div 

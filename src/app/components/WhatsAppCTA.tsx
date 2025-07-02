@@ -14,7 +14,7 @@ export default function WhatsAppCTA() {
         setIsVisible(true);
       } else {
         setIsVisible(false);
-        setIsExpanded(false);
+        setIsExpanded(false); // Görünmez olduğunda genişlemeyi sıfırla
       }
     };
 

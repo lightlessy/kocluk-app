@@ -9,6 +9,7 @@ import './Navbar.css';
 const navLinks = [
   { href: '/hizmetler', label: 'Hizmetler' },
   { href: '/haftaningorevi', label: 'Haftanın Görevi' },
+  { href: '/net-simulatoru', label: 'Net Simülatörü' },
   { href: '/blog', label: 'Blog' },
   { href: '/iletisim', label: 'İletişim' },
 ];
