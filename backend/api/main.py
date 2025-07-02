@@ -13,6 +13,7 @@ app = FastAPI()
 
 origins = [
     "http://localhost:3000",
+    "https://kocluk-app.vercel.app",  # frontend URL'n
 ]
 
 app.add_middleware(
