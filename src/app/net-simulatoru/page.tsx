@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useMemo, useEffect } from 'react';
-import { FiTrendingUp, FiBarChart2, FiTarget, FiZap } from 'react-icons/fi';
+import { FiBarChart2, FiTarget, FiZap } from 'react-icons/fi';
 
 interface Ders {
   name: string;
@@ -134,7 +134,14 @@ export default function NetSimulatoruPage() {
     }
   }, [alan, year]);
   
-  const [netValues, setNetValues] = useState<any>({});
+  type NetValue = {
+    doğru: number;
+    yanlış: number;
+  };
+  type NetValuesType = {
+    [key: string]: NetValue;
+  };
+  const [netValues, setNetValues] = useState<NetValuesType>({});
   const [obp, setObp] = useState(80);
   const [obpInput, setObpInput] = useState('80');
   const [hedefSiralama, setHedefSiralama] = useState(10000);
@@ -160,7 +167,7 @@ export default function NetSimulatoruPage() {
         if (field === 'yanlış') newYanlış = currentDers.questions - newDoğru;
     }
 
-    setNetValues((prev: any) => ({
+    setNetValues((prev: NetValuesType) => ({
       ...prev,
       [dersName]: { doğru: newDoğru, yanlış: newYanlış },
     }));
@@ -296,7 +303,7 @@ export default function NetSimulatoruPage() {
             YKS Puan & Sıralama Simülatörü
           </h1>
           <p className="text-lg text-slate-400 max-w-3xl mx-auto">
-            Stratejini belirle, hedeflerine ulaş. YKS'de bir adım öne geç.
+            YKS&apos;de bir adım öne geç.
           </p>
         </div>
 

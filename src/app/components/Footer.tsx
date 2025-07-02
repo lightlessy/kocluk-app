@@ -4,7 +4,6 @@ import { useState, useEffect, useRef } from 'react';
 import { FaInstagram, FaTwitter, FaWhatsapp, FaYoutube } from 'react-icons/fa';
 import { FiUsers, FiCheckSquare } from 'react-icons/fi';
 import './Footer.css';
-import { FaSwatchbook } from 'react-icons/fa6';
 
 const academicSymbols = 'Σ∫π√αβθλ∞ωμψABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
 
