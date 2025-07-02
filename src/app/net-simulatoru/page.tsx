@@ -229,7 +229,7 @@ export default function NetSimulatoruPage() {
     console.log("API çağrısı için parametreler:", { mode, alan, year, features });
     console.log("API Çağrısı için parametrelerin tipi:", features.map(f => typeof f));
     try {
-      const response = await fetch('http://localhost:8000/api', { // <-- Bu kısmı güncelleyin
+      const response = await fetch('https://kocluk-app-backend.onrender.com/api', { // <-- Bu kısmı güncelleyin
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ mode, alan, year, features }),
