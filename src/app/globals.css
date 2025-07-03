@@ -1,8 +1,21 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Light Mode Pastel Palette */
+  --background: #F8F8F8; /* Very light grey/off-white */
+  --foreground: #333333; /* Soft dark grey for text */
+  --primary-color: #B2D8D8; /* Muted light blue-green */
+  --secondary-color: #D8B2D8; /* Muted light purple */
+  --border-color: #E0E0E0; /* Light grey for borders */
+  --card-background: #FFFFFF; /* White for cards/elements */
+  --heading-color: #222222; /* Slightly darker for headings */
+
+  /* Spacing Variables */
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
 }
 
 @theme inline {
@@ -14,8 +27,14 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #1E293B;
-    --foreground: #ededed;
+    /* Dark Mode Pastel Palette */
+    --background: #0F172A; /* Dark muted blue */
+    --foreground: #E0E0E0; /* Soft light grey for text */
+    --primary-color: #66A5AD; /* Muted medium blue-green */
+    --secondary-color: #A566AD; /* Muted medium purple */
+    --border-color: #4A6572; /* Darker grey for borders */
+    --card-background: #34495E; /* Darker blue for cards/elements */
+    --heading-color: #F0F0F0; /* Lighter for headings */
   }
 }
 
@@ -24,3 +43,4 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+

@@ -1,0 +1,36 @@
+.share-buttons-container {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.share-label {
+  font-weight: 600;
+  color: var(--foreground);
+}
+
+.share-icons {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.share-icon-link {
+  color: #64748b; /* slate-500 */
+  transition: all 0.2s ease-in-out;
+}
+
+.share-icon-link:hover {
+  transform: scale(1.1);
+  color: var(--foreground);
+}
+
+/* Koyu Tema Stilleri */
+@media (prefers-color-scheme: dark) {
+  .share-icon-link {
+    color: #94a3b8; /* slate-400 */
+  }
+  .share-icon-link:hover {
+    color: #e2e8f0; /* slate-200 */
+  }
+}

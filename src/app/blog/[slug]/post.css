@@ -1,0 +1,98 @@
+/* Genel Stiller */
+:root {
+  --blog-background: #0F172A; /* slate-900 equivalent */
+  --blog-card-background: #1E293B; /* slate-800 equivalent */
+  --blog-text-color: #E2E8F0; /* slate-200 equivalent */
+  --blog-accent-color: #22D3EE; /* cyan-400 equivalent */
+  --blog-light-text: #94A3B8; /* slate-400 equivalent */
+}
+
+.post-container {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 80px 2rem 4rem; /* Navbar çakışmasını önlemek için padding */
+  background-color: var(--blog-background);
+  color: var(--blog-text-color);
+}
+
+.post-header {
+  margin-bottom: 3rem;
+}
+
+.post-title {
+  font-size: 2.5rem; /* Slightly smaller for a cleaner look */
+  font-weight: 700; /* Bolder for emphasis */
+  line-height: 1.2;
+  color: var(--blog-accent-color);
+  margin-bottom: 1rem;
+}
+
+.post-date {
+  font-size: 0.9rem; /* Smaller for less prominence */
+  color: var(--blog-light-text);
+}
+
+.post-content {
+  font-size: 1.125rem; /* Keep as is, good size */
+  line-height: 1.8; /* Slightly increased for better readability */
+  color: var(--blog-text-color);
+}
+
+.post-content h2 {
+  font-size: 1.75rem;
+  font-weight: 600;
+  margin-top: 3rem;
+  margin-bottom: 1.25rem;
+  padding-bottom: 0.5rem; /* Add padding for border-bottom */
+  border-bottom: 1px solid var(--blog-card-background);
+}
+
+.post-content p {
+  margin-bottom: 1.5rem; /* Keep as is, good spacing */
+}
+
+.post-content pre {
+  padding: 1.25rem;
+  border-radius: 8px;
+  overflow-x: auto;
+  margin: 2rem 0;
+  background-color: var(--blog-card-background);
+  border: 1px solid var(--blog-card-background);
+}
+
+.post-content pre code {
+  padding: 0;
+  background-color: transparent; /* Ensure code background is transparent within pre */
+  color: var(--blog-text-color);
+}
+
+/* Açık Tema Stilleri */
+.post-content a {
+  color: var(--blog-accent-color);
+  text-decoration: none;
+  border-bottom: 1px solid var(--blog-accent-color);
+}
+.post-content a:hover {
+  background-color: var(--blog-accent-color);
+  opacity: 0.8; /* Add some opacity for hover effect */
+}
+.post-content blockquote {
+  border-left: 3px solid var(--blog-accent-color);
+  padding-left: 1.5rem;
+  margin: 2rem 0;
+  font-style: italic;
+  color: var(--blog-text-color);
+}
+.post-content code {
+  background-color: var(--blog-card-background);
+  color: var(--blog-text-color);
+  padding: 0.2em 0.4em;
+  border-radius: 4px;
+}
+
+/* Koyu Tema Stilleri (already handled by variables) */
+@media (prefers-color-scheme: dark) {
+  /* No specific dark mode overrides needed here if variables are set correctly */
+}
+
+

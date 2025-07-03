@@ -1,0 +1,116 @@
+/* Genel Stiller */
+:root {
+  --blog-background: #0F172A; /* slate-900 equivalent */
+  --blog-card-background: #1E293B; /* slate-800 equivalent */
+  --blog-text-color: #E2E8F0; /* slate-200 equivalent */
+  --blog-accent-color: #22D3EE; /* cyan-400 equivalent */
+  --blog-light-text: #94A3B8; /* slate-400 equivalent */
+}
+
+.blog-container {
+  max-width: 960px;
+  margin: 0 auto;
+  margin-top: 80px; /* Increased margin for navbar clearance */
+  margin-bottom: 40px; /* Bottom margin for spacing */
+  padding: 100px 2rem 4rem; /* Increased top and bottom padding for navbar clearance and spacing */
+  background-color: var(--blog-background);
+  color: var(--blog-text-color);
+  border: 1px solid var(--blog-card-background); /* Subtle border */
+  border-radius: 12px; /* Rounded corners for the container */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Soft shadow */
+}
+
+.blog-header {
+  text-align: left;
+  margin-bottom: 2.5rem;
+  font-size: 2.8rem;
+  font-weight: 700;
+  color: var(--blog-accent-color);
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--blog-card-background);
+}
+
+.focused-post-section {
+  margin-bottom: 3rem;
+}
+
+.focused-post-card {
+  display: flex; /* Use flex for image and content layout */
+  background: var(--blog-card-background);
+  border-radius: 8px;
+  overflow: hidden;
+  text-decoration: none;
+  color: inherit;
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.focused-post-card .card-image {
+  width: 40%; /* Image takes 40% width */
+  height: 200px; /* Fixed height for the image */
+  object-fit: cover;
+}
+
+.focused-post-card .card-content {
+  padding: 2rem;
+  width: 60%; /* Content takes 60% width */
+}
+
+.focused-post-card .card-title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: var(--blog-accent-color);
+}
+
+.focused-post-card .card-date {
+  font-size: 1rem;
+  color: var(--blog-light-text);
+}
+
+.blog-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 2rem; /* Biraz daha boşluk */
+}
+
+.blog-card {
+  background: var(--blog-card-background);
+  border-radius: 8px; /* Daha yumuşak köşeler */
+  overflow: hidden;
+  text-decoration: none;
+  color: inherit;
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.blog-card .card-image {
+  width: 100%;
+  height: 150px; /* Fixed height for grid images */
+  object-fit: cover;
+}
+
+.card-content {
+  padding: 1.5rem;
+}
+
+.card-title {
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  color: var(--blog-accent-color);
+}
+
+.card-date {
+  color: var(--blog-light-text);
+}
+
+/* Hover effects */
+.focused-post-card:hover,
+.blog-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+
+}
