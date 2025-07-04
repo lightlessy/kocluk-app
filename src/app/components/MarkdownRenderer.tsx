@@ -1,13 +1,19 @@
 "use client";
 
-import { Viewer } from "@toast-ui/react-editor";
-import "@toast-ui/editor/dist/toastui-editor.css";
-import "../styles/toastui-editor-dark.css";
+import ReactMarkdown from "react-markdown";
+import rehypeRaw from "rehype-raw";
+import rehypeHighlight from "rehype-highlight";
+import remarkGfm from "remark-gfm";
 
 export default function MarkdownRenderer({ content }: { content: string }) {
   return (
-    <div className="toastui-editor-dark">
-      <Viewer initialValue={content} />
+    <div className="prose prose-invert max-w-none">
+      <ReactMarkdown
+        rehypePlugins={[rehypeRaw, rehypeHighlight]}
+        remarkPlugins={[remarkGfm]}
+      >
+        {content}
+      </ReactMarkdown>
     </div>
   );
 }

@@ -3,6 +3,8 @@ import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
 import './blog.css';
+// app/blog/[slug]/page.tsx gibi dinamik sayfalarda:
+
 
 // Helper function to get posts
 const getPosts = () => {
@@ -17,13 +19,14 @@ const getPosts = () => {
 
     return {
       slug,
-      ...(matterResult.data as { title: string; date: string; focus?: boolean; author?: string; image?: string }),
+      ...(matterResult.data as { title: string; date: string; focus?: boolean; author?: string; imageUrl?: string }),
     };
   });
 
   // Sort posts by date
   return allPostsData.sort((a, b) => (a.date < b.date ? 1 : -1));
 };
+
 
 export default function Blog() {
   const posts = getPosts();
@@ -37,7 +40,7 @@ export default function Blog() {
       {focusedPost && (
         <div className="focused-post-section">
           <Link href={`/blog/${focusedPost.slug}`} className="focused-post-card">
-            <img src={focusedPost.image || '/images/goc.jpg'} alt={focusedPost.title} className="card-image" />
+            <img src={focusedPost.imageUrl || '/images/goc.jpg'} alt={focusedPost.title} className="card-image" />
             <div className="card-content">
               <h2 className="card-title">{focusedPost.title}</h2>
               <p className="card-date">
@@ -50,9 +53,9 @@ export default function Blog() {
       )}
 
       <div className="blog-grid">
-        {otherPosts.map(({ slug, title, date, author, image }) => (
+        {otherPosts.map(({ slug, title, date, author, imageUrl }) => (
           <Link href={`/blog/${slug}`} key={slug} className="blog-card">
-            <img src={image || '/images/goc.jpg'} alt={title} className="card-image" />
+            <img src={imageUrl || '/images/goc.jpg'} alt={title} className="card-image" />
             <div className="card-content">
               <h2 className="card-title">{title}</h2>
               <p className="card-date">

@@ -1,0 +1,35 @@
+.sticker-picker-container {
+  width: 320px; /* Genişliği biraz artırdım */
+  height: 400px;
+  overflow-y: auto;
+  padding: 10px;
+  background-color: #f9fafb; /* Arka plan rengi ekledim */
+  border: 1px solid #e5e7eb; /* Belirgin bir kenarlık ekledim */
+  border-radius: 12px; /* Köşeleri yuvarladım */
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); /* Daha belirgin gölge */
+  z-index: 100; /* z-index değerini artırdım */
+}
+
+.sticker-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+  gap: 10px;
+}
+
+.sticker-item {
+  cursor: pointer;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: transform 0.2s ease-in-out;
+}
+
+.sticker-item:hover {
+  transform: scale(1.1);
+}
+
+.sticker-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background-color: #f3f4f6; /* Resim yüklenmezse görünecek arka plan */
+}

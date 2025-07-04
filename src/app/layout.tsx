@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google"; // Inter fontunu import ediyoruz
+import { Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 
-const inter = Inter({ subsets: ["latin"] }); // Fontu yüklüyoruz
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -18,13 +18,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}> {/* Fontu body'e uyguluyoruz */}
+      <body className={`${inter.className} min-h-screen flex flex-col`}>
         <Navbar />
-        {children}
+        <main className="flex-grow max-w-4xl mx-auto w-full px-4">
+          {children}
+        </main>
         <Footer />
       </body>
     </html>
   );
 }
-
- 
+  

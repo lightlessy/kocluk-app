@@ -2,54 +2,60 @@ import { NextRequest, NextResponse } from 'next/server';
 import fs from 'fs';
 import path from 'path';
 
-// Helper to create a URL-friendly slug
-const slugify = (str: string) =>
-  str
-    .toLowerCase()
-    .trim()
-    .replace(/[\s_]+/g, '-') // Replace spaces and underscores with -
-    .replace(/[^\w-]+/g, '') // Remove all non-word chars
-    .replace(/--+/g, '-'); // Replace multiple - with single -
+export const runtime = 'nodejs'; // edge değil, çünkü fs kullanılacak
 
 export async function POST(req: NextRequest) {
   try {
-    const { title, content, imageUrl, secret } = await req.json();
-
-    // 1. Validate Secret Key
-    if (secret !== process.env.POST_SECRET) {
-      return NextResponse.json({ message: 'Geçersiz gizli anahtar.' }, { status: 401 });
+    const apiKey = req.headers.get('x-api-key');
+    console.log('API Key gelen:', apiKey);
+    console.log('process.env.ADD_POST_API_KEY:', process.env.ADD_POST_API_KEY);
+    if (!apiKey || apiKey !== process.env.ADD_POST_API_KEY) {
+      return NextResponse.json({ error: 'Geçersiz API anahtarı.' }, { status: 401 });
     }
 
-    // 2. Validate Input
+    const { title, imageUrl, content } = await req.json();
+
     if (!title || !content) {
-      return NextResponse.json({ message: 'Başlık ve içerik alanları zorunludur.' }, { status: 400 });
+      return NextResponse.json({ error: 'Başlık ve içerik zorunludur.' }, { status: 400 });
     }
 
-    // 3. Create Post File
-    const slug = slugify(title);
-    const date = new Date().toISOString().split('T')[0]; // Format: YYYY-MM-DD
+    // slug oluştur
+    const slug = title
+      .toLowerCase()
+      .replace(/[^a-z0-9ğüşöçıİĞÜŞÖÇ\s-]/gi, '')
+      .replace(/\s+/g, '-')
+      .replace(/-+/g, '-')
+      .replace(/^-+|-+$/g, '');
 
+    // Yazı içeriğini markdown veya html olarak oluştur
     const fileContent = `---
 title: "${title}"
-date: "${date}"
-${imageUrl ? `image: "${imageUrl}"\n` : ''}---
+imageUrl: "${imageUrl || ''}"
+date: "${new Date().toISOString()}"
+slug: "${slug}"
+---
 
-${content}`;
+${content}
+`;
 
+    // Yazı dosyasının yolu (örnek: /posts/slug.md)
+      const postsDir = path.join(process.cwd(), 'posts');
+    if (!fs.existsSync(postsDir)) {
+      fs.mkdirSync(postsDir);
+    }
+    const filePath = path.join(postsDir, `${slug}.md`);
 
-    const filePath = path.join(process.cwd(), 'posts', `${slug}.md`);
-
-    // Check if file already exists to prevent overwriting
+    // Eğer dosya zaten varsa hata döndür
     if (fs.existsSync(filePath)) {
-        return NextResponse.json({ message: 'Bu başlığa sahip bir yazı zaten mevcut.' }, { status: 409 });
+      return NextResponse.json({ error: 'Bu başlığa sahip bir yazı zaten mevcut.' }, { status: 409 });
     }
 
+    // Dosyayı yaz
     fs.writeFileSync(filePath, fileContent);
 
-    return NextResponse.json({ message: 'Yazı başarıyla oluşturuldu.', slug }, { status: 201 });
-
-  } catch (error) {
-    console.error(error);
-    return NextResponse.json({ message: 'Sunucu hatası oluştu.' }, { status: 500 });
+    return NextResponse.json({ success: true, message: 'Yazı başarıyla oluşturuldu.', slug }, { status: 201 });
+  } catch (e) {
+    console.error(e);
+    return NextResponse.json({ error: 'Sunucu hatası.' }, { status: 500 });
   }
 }
