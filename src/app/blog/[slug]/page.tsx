@@ -287,8 +287,40 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
       <article className="max-w-4xl mx-auto py-12 mt-8">
-        <style>{/* ProseMirror CSS burada kalıyor, değişmedi */}</style>
-        <h1 className="text-3xl md:text-4xl font-bold border-b-2 border-blue-200 py-2 mb-4">{post.title}</h1>
+ <style>
+          {`
+            .ProseMirror {
+              outline: none;
+              min-height: 400px;
+              border: 1px solid #d1d5db;
+              border-radius: 0.375rem;
+              padding: 0.75rem 1rem;
+              transition: border-color 0.2s;
+              padding-bottom: 8rem;
+              white-space: pre-wrap;
+              word-break: break-word;
+            }
+            .ProseMirror > * + * { margin-top: 0.75em; }
+            .ProseMirror ul, .ProseMirror ol { padding: 0 1rem; }
+            .ProseMirror h1 { font-size: 2.25rem; font-weight: 700; }
+            .ProseMirror h2 { font-size: 1.875rem; font-weight: 600; }
+            .ProseMirror h3 { font-size: 1.5rem; font-weight: 600; }
+            .ProseMirror h4 { font-size: 1.25rem; font-weight: 600; }
+            .ProseMirror h5 { font-size: 1.125rem; font-weight: 600; }
+            .ProseMirror h6 { font-size: 1rem; font-weight: 600; }
+            .ProseMirror code { background-color: rgba(97, 97, 97, 0.1); color: #616161; padding: 0.25rem 0.5rem; border-radius: 0.25rem; }
+            .ProseMirror pre { background: #0D0D0D; color: #FFF; font-family: 'JetBrainsMono', monospace; padding: 0.75rem 1rem; border-radius: 0.5rem; }
+            .ProseMirror blockquote { padding-left: 1rem; border-left: 3px solid rgba(0,0,0,0.1); }
+            .ProseMirror img { max-width: 100%; height: auto; cursor: pointer; border-radius: 0.5rem; display: block; }
+            .ProseMirror img[data-align="left"] { float: left; margin-right: 1rem; }
+            .ProseMirror img[data-align="right"] { float: right; margin-left: 1rem; }
+            .ProseMirror img[data-align="center"] { margin-left: auto; margin-right: auto; }
+            .ProseMirror .ProseMirror-selectednode { outline: 3px solid #68CEF8; }
+            .ProseMirror table { border-collapse: collapse; table-layout: fixed; width: 100%; margin: 0; overflow: hidden; }
+            .ProseMirror td, .ProseMirror th { min-width: 1em; border: 2px solid #ced4da; padding: 3px 5px; vertical-align: top; box-sizing: border-box; position: relative; }
+            .ProseMirror th { font-weight: bold; text-align: left; background-color: #f1f3f5; }
+          `}
+        </style>        <h1 className="text-3xl md:text-4xl font-bold border-b-2 border-blue-200 py-2 mb-4">{post.title}</h1>
         <div className="flex flex-wrap items-center mb-6 gap-2">
           {post.date && (
             <MetaBadge
