@@ -1,7 +1,6 @@
 // /src/app/blog/[slug]/page.tsx
 import React from "react";
 import { notFound } from 'next/navigation';
-import { Metadata } from 'next';
 
 function stripHtml(html: string): string {
   return html.replace(/<[^>]*>?/gm, '').trim();
