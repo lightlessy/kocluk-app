@@ -7,8 +7,8 @@ function stripHtml(html: string): string {
   return html.replace(/<[^>]*>?/gm, '').trim();
 }
 
-export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
-  const post = await getPost(params.slug);
+export async function generateMetadata({ params }: { params: { slug: string } }) {
+  const post = await getPost(params.slug); // İçeride .slug kullanıyoruz
   const plainContent = stripHtml(post.content);
   
   return {
@@ -32,10 +32,7 @@ interface Post {
 }
 
 function getApiBaseUrl() {
-  if (typeof window !== "undefined") {
-    return window.location.origin;
-  }
-  return process.env.API_BASE_URL || "http://localhost:3000";
+  return "http://localhost:3000";
 }
 
 async function getPost(slug: string): Promise<Post> {
@@ -67,7 +64,7 @@ export async function generateStaticParams() {
 }
 
 export default async function Page({ params }: { params: { slug: string } }) {
-  const post = await getPost(params.slug);
+  const post = await getPost(params.slug); // İçeride .slug kullanıyoruz
   const plainContent = stripHtml(post.content);
 
   function preserveEmptyLines(html: string) {
