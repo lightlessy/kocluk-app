@@ -8,9 +8,9 @@ export const runtime = 'nodejs';
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { slug: string } }
-) {
-  const slug = params?.slug; // params'ı direkt kullanabilirsiniz
+    { params } : { params: Promise<{ slug: string }> }
+): Promise<NextResponse> {
+  const { slug } = await params;
   const postsDir = path.join(process.cwd(), 'posts');
   const filePath = path.join(postsDir, `${slug}.md`);
 
