@@ -56,9 +56,13 @@ export default function DeletePostPage() {
         .then(res => res.json())
         .then(data => setPosts(data.posts));
       setSelectedPost('');
-    } catch (err: any) {
-      setError(err.message);
-    }
+    } catch (err) {
+  if (err instanceof Error) {
+    setError(err.message);
+  } else {
+    setError(String(err)); // bilinmeyen tipleri stringe çevir
+  }
+}
   };
 
   return (
