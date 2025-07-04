@@ -52,7 +52,7 @@ async function getPost(slug: string): Promise<Post> {
 export async function generateStaticParams() {
   try {
     const baseUrl = getApiBaseUrl();
-    const res = await fetch(`${baseUrl}/api/blog/slugs`);
+    const res = await fetch(`${baseUrl}/api/blog/slugs`, { cache: "no-store" });
     if (!res.ok) return [];
 
     const slugs: string[] = await res.json();
