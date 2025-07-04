@@ -27,7 +27,9 @@ interface Post {
   content: string;
   date: string;
   readingTime: number;
-  [key: string]: any; // Diğer olası metadata alanları için
+  description?: string;
+  imageUrl?: string;
+  [key: string]: unknown; // Diğer olası metadata alanları için
 }
 
 function getApiBaseUrl() {
