@@ -729,7 +729,7 @@ export default function App() {
           Gönderiyi Yayınla
         </button>
         {publishSuccess && (
-          <span className="mt-2 text-green-600 font-semibold">Gönderi başarıyla Google Drive'a yüklendi!</span>
+          <span className="mt-2 text-green-600 font-semibold">Gönderi başarıyla Google Drive&#39;a yüklendi!</span>
         )}
       </div>
     </div>
