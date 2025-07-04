@@ -12,7 +12,7 @@ export async function GET() {
       title: filename.replace(/\.md$/, '').replace(/-/g, ' '),
     }));
     return NextResponse.json({ posts });
-  } catch (error) {
+  } catch {
     return NextResponse.json({ error: 'Failed to fetch posts' }, { status: 500 });
   }
 }

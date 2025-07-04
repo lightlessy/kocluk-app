@@ -19,7 +19,7 @@ export async function POST(request: Request) {
     const filePath = path.join(process.cwd(), 'posts', `${slug}.md`);
     fs.unlinkSync(filePath);
     return NextResponse.json({ message: 'Post deleted successfully' });
-  } catch (error) {
+  } catch {
     return NextResponse.json({ error: 'Failed to delete post' }, { status: 500 });
   }
 }
