@@ -46,7 +46,7 @@ export default function Blog() {
         postList.sort((a, b) => (a.date < b.date ? 1 : -1));
         setPosts(postList);
         setLoading(false);
-      } catch (err) {
+      } catch {
         setError('Yazılar yüklenemedi. Lütfen daha sonra tekrar deneyin.');
         setLoading(false);
       }

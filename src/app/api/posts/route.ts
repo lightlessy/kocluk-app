@@ -18,13 +18,23 @@ const firebaseConfig = {
 const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApps()[0];
 const db = getFirestore(app);
 
+type Post = {
+  slug: string;
+  title: string;
+  date: string;
+  focus?: boolean;
+  author?: string;
+  imageUrl?: string;
+  content?: string;
+};
+
 export async function GET() {
   try {
     const postsRef = collection(db, 'posts');
     const snapshot = await getDocs(postsRef);
-    const posts: any[] = [];
+    const posts: Post[] = [];
     snapshot.forEach((doc) => {
-      posts.push({ ...doc.data(), id: doc.id });
+      posts.push({ ...doc.data(), id: doc.id } as unknown as Post);
     });
     // Tarihe göre sırala (en yeni başta)
     posts.sort((a, b) => (a.date < b.date ? 1 : -1));
