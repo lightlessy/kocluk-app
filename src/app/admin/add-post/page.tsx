@@ -16,20 +16,73 @@ import TextAlign from '@tiptap/extension-text-align';
 import Link from 'next/link';
 import TiptapLink from '@tiptap/extension-link';
 import Dropcursor from '@tiptap/extension-dropcursor';
+import TaskList from '@tiptap/extension-task-list';
+import TaskItem from '@tiptap/extension-task-item';
 import { FaSmile } from "react-icons/fa";
 
 // Emoji seçici ve ikonlar için kütüphaneler
 import {
-  Bold, Italic, Underline as UnderlineIcon, Heading1, Heading2, Heading3, Heading4, Heading5, Heading6, List, ListOrdered, Quote, Image as ImageIcon, Palette, Minus, Maximize, Minimize, Trash2, AlignLeft, AlignCenter, AlignRight, Link2
+  Bold, Italic, Underline as UnderlineIcon, Heading1, Heading2, Heading3, Heading4, Heading5, Heading6, List, ListOrdered, Quote, Image as ImageIcon, Palette, Minus, Maximize, Minimize, Trash2, AlignLeft, AlignCenter, AlignRight, Link2, ListTodo
 } from 'lucide-react';
 
 // == BÖLÜM 1: STİL TANIMLAMALARI ==
 const editorStyles = `
+  .ProseMirror ul, .ProseMirror ol {
+    padding-left: 2em;
+    margin: 0 0 1em 0;
+    color: inherit;
+  }
+  .ProseMirror ul {
+    list-style-type: disc;
+  }
+  .ProseMirror ol {
+    list-style-type: decimal;
+  }
   .ProseMirror li {
     list-style-position: inside;
+    color: inherit;
+    display: list-item;
+    margin: 0.2em 0 0.2em 0;
+    padding-left: 0;
+    white-space: normal;
+    word-break: break-word;
+  }
+  /* Liste içindeki p'leri düzelt: p'yi blok olmaktan çıkar, marginleri sıfırla */
+  .ProseMirror li > p {
+    display: inline;
+    margin: 0;
+    padding: 0;
+  }
+  .ProseMirror li > p em,
+  .ProseMirror li > p strong,
+  .ProseMirror li > p span,
+  .ProseMirror li > p u {
+    display: inline;
   }
   .ProseMirror li::marker {
-    color: white !important;
+    color: #64748b !important;
+    font-weight: 400;
+  }
+  /* Tikli (task) listeler sadece burada flex */
+  .ProseMirror ul[data-type="taskList"] {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1em 0;
+  }
+  .ProseMirror ul[data-type="taskList"] li {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    margin-left: 0;
+    padding-left: 0;
+  }
+  .ProseMirror ul[data-type="taskList"] li > label {
+    flex: 0 0 auto;
+    margin-right: 0.5rem;
+    user-select: none;
+  }
+  .ProseMirror ul[data-type="taskList"] li > div {
+    flex: 1 1 auto;
   }
   .ProseMirror {
     outline: none;
@@ -65,6 +118,23 @@ const editorStyles = `
   .ProseMirror table { border-collapse: collapse; table-layout: fixed; width: 100%; margin: 0; overflow: hidden; }
   .ProseMirror td, .ProseMirror th { min-width: 1em; border: 2px solid #ced4da; padding: 3px 5px; vertical-align: top; box-sizing: border-box; position: relative; }
   .ProseMirror th { font-weight: bold; text-align: left; background-color: #f1f3f5; }
+  /* Task List Styles */
+  .ProseMirror ul[data-type="taskList"] {
+    list-style: none;
+    padding: 0;
+  }
+  .ProseMirror ul[data-type="taskList"] li {
+    display: flex;
+    align-items: center;
+  }
+  .ProseMirror ul[data-type="taskList"] li > label {
+    flex: 0 0 auto;
+    margin-right: 0.5rem;
+    user-select: none;
+  }
+  .ProseMirror ul[data-type="taskList"] li > div {
+    flex: 1 1 auto;
+  }
 `;
 
 // == BÖLÜM 2: BİLEŞENLER ==
@@ -146,6 +216,14 @@ const Toolbar = ({ editor, onStickerButtonClick }: ToolbarProps) => {
       {/* Listeler */}
       <button onClick={() => editor.chain().focus().toggleBulletList().run()} className={editor.isActive('bulletList') ? 'bg-gray-300 p-2.5 rounded' : 'p-2.5 rounded hover:bg-gray-200'}><List className="text-blue-400" size={20} /></button>
       <button onClick={() => editor.chain().focus().toggleOrderedList().run()} className={editor.isActive('orderedList') ? 'bg-gray-300 p-2.5 rounded' : 'p-2.5 rounded hover:bg-gray-200'}><ListOrdered className="text-blue-400" size={20} /></button>
+      {/* Tikli Liste Toolu */}
+      <button
+        onClick={() => editor?.chain().focus().toggleTaskList().run()}
+        className={editor?.isActive('taskList') ? 'bg-gray-300 p-2.5 rounded' : 'p-2.5 rounded hover:bg-gray-200'}
+        title="Tik Atmalı Liste"
+      >
+        <ListTodo className="text-green-500" size={20} />
+      </button>
 
       <div className="border-l h-6 mx-2"></div>
 
@@ -479,6 +557,10 @@ export default function App() {
         autolink: true,
       }),
       Dropcursor,
+      TaskList,
+      TaskItem.configure({
+        nested: true,
+      }),
     ],
     content: editorContent,
     onUpdate: ({ editor }) => setEditorContent(editor.getHTML()),
@@ -566,13 +648,13 @@ export default function App() {
       </div>
 
       {/* Başlık inputu */}
-      <div className="max-w-4xl mx-auto mb-6">
+      <div className="max-w-2xl mx-auto mb-6">
         <input
           type="text"
           value={title}
           onChange={e => setTitle(e.target.value)}
           placeholder="Başlık"
-          className="w-full text-3xl md:text-4xl font-bold border-1 border-gray-200 focus:border-blue-500 outline-none py-2 px-2 mb-2"
+          className="w-full text-3xl md:text-2xl font-bold border-1 border-gray-200 focus:border-blue-500 outline-none py-2 px-2 mb-2"
           required
         />
       </div>
@@ -582,7 +664,7 @@ export default function App() {
           <p className="text-xl text-gray-400 mt-2">Daha fazla özellik, daha fazla özgürlük, Mutlu Beyzalar.</p>
         </header>
       )}
-      <div className={`${isFullScreen ? 'fixed inset-0 z-50' : 'relative max-w-4xl mx-auto'}`}>
+      <div className={`${isFullScreen ? 'fixed inset-0 z-50' : 'relative max-w-2xl mx-auto'}`}>
         <button 
           onClick={toggleFullScreen} 
           className="absolute top-2 right-2 z-20 p-2 rounded-full bg-blue-600 hover:bg-red-300 transition-colors"
@@ -627,7 +709,7 @@ export default function App() {
       />
       {/* İçerik önizlemesi */}
       {!isFullScreen && (
-        <div className="mt-12 max-w-4xl mx-auto">
+        <div className="mt-12 max-w-2xl mx-auto">
           <h2 className="text-2xl font-bold text-blue-600 border-b pb-2 mb-4">İçeriğin Önizlemesi</h2>
           <div 
             className="ProseMirror prose max-w-none p-6 rounded-lg shadow-md"

@@ -18,8 +18,32 @@ export default function Navbar() {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [hideOnScroll, setHideOnScroll] = useState(false);
+  
+  useEffect(() => {
+    // Sadece /blog/[slug] sayfalarında çalışsın
+    const isBlogDetail = /^\/blog\/[^/]+$/.test(pathname);
+    if (!isBlogDetail) {
+      setHideOnScroll(false);
+      return;
+    }
+
+    let lastScrollY = window.scrollY;
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 10);
+      if (window.scrollY > lastScrollY && window.scrollY > 80) {
+        setHideOnScroll(true); // aşağı kaydırınca gizle
+      } else {
+        setHideOnScroll(false); // yukarı kaydırınca göster
+      }
+      lastScrollY = window.scrollY;
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [pathname]);
 
   useEffect(() => {
+  
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 10);
     };
@@ -28,7 +52,7 @@ export default function Navbar() {
   }, []);
 
   return (
-    <nav className={`navbar ${isScrolled ? 'scrolled' : ''}`}>
+    <nav className={`navbar${isScrolled ? ' scrolled' : ''}${hideOnScroll ? ' hide-on-scroll' : ''}`}>
       <div className="navbar-content">
         <Link href="/" className="logo">
           Beyzamı Seviyorum
