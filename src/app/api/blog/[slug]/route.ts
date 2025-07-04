@@ -7,8 +7,8 @@ import readingTime from 'reading-time';
 export const runtime = 'nodejs';
 
 export async function GET(
-  req: NextRequest,
-  context: { params: { slug: string } }
+  request: NextRequest, // 1. PARAMETRE: Her zaman gelen istektir.
+  context: { params: { slug: string } } // 2. PARAMETRE: Dinamik kısımları içerir.
 ) {
   const { slug } = context.params;
   const postsDir = path.join(process.cwd(), 'posts');
