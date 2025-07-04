@@ -10,17 +10,7 @@ interface MarkdownEditorProps {
   content?: string;
   onChange?: (content: string) => void;
 }
-const colors = [
-  "#f87171", // kırmızı
-  "#34d399", // yeşil
-  "#60a5fa", // mavi
-  "#000000", // siyah
-  "#fbbf24", // sarı
-  "#a78bfa", // mor
-  "#f43f5e", // koyu kırmızı
-  "#10b981", // koyu yeşil
-  // istediğin kadar ekle
-];
+
 
 export default function MarkdownEditor({ content = "", onChange }: MarkdownEditorProps) {
   const [color, setColor] = useState("#000000");
