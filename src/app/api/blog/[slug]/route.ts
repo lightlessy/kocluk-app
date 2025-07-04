@@ -4,11 +4,13 @@ import path from 'path';
 import matter from 'gray-matter';
 import readingTime from 'reading-time';
 
+export const runtime = 'nodejs';
+
 export async function GET(
-  request: NextRequest,
-  { params }: { params: { slug: string } }
+  req: NextRequest,
+  context: { params: { slug: string } }
 ) {
-  const { slug } = params;
+  const { slug } = context.params;
   const postsDir = path.join(process.cwd(), 'posts');
   const filePath = path.join(postsDir, `${slug}.md`);
 
