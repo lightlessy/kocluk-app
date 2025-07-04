@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useCallback, useRef, ChangeEvent, DragEvent } from 'react';
+import React, { useState, useCallback, useRef, ChangeEvent } from 'react';
 import { EditorContent, useEditor, Editor, BubbleMenu } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import Underline from '@tiptap/extension-underline';
@@ -16,11 +16,11 @@ import TextAlign from '@tiptap/extension-text-align';
 import Link from 'next/link';
 import TiptapLink from '@tiptap/extension-link';
 import Dropcursor from '@tiptap/extension-dropcursor';
-import { FaSmile, FaHeart, FaStar, FaThumbsUp, FaRocket, FaLaughSquint, FaCat, FaDog, FaAppleAlt, FaCoffee } from "react-icons/fa";
+import { FaSmile } from "react-icons/fa";
 
 // Emoji seçici ve ikonlar için kütüphaneler
 import {
-  Bold, Italic, Underline as UnderlineIcon, Strikethrough, Code, Heading1, Heading2, Heading3, Heading4, Heading5, Heading6, Pilcrow, List, ListOrdered, Quote, Image as ImageIcon, Palette, Minus, Table as TableIcon, Maximize, Minimize, Trash2, CornerDownLeft, AlignLeft, AlignCenter, AlignRight, Sticker, Link2, Columns, Rows, Trash
+  Bold, Italic, Underline as UnderlineIcon, Heading1, Heading2, Heading3, Heading4, Heading5, Heading6, List, ListOrdered, Quote, Image as ImageIcon, Palette, Minus, Maximize, Minimize, Trash2, AlignLeft, AlignCenter, AlignRight, Link2
 } from 'lucide-react';
 
 // == BÖLÜM 1: STİL TANIMLAMALARI ==
@@ -78,23 +78,7 @@ const colors = [
   "#444444", "#5c0000", "#663d00", "#666600", "#003700", "#002966", "#3d1466"
 ];
 
-const ColorPicker = ({ onChange, icon, title }: { onChange: (color: string) => void, icon: React.ReactNode, title: string }) => (
-  <div className="relative group">
-    <button className="p-2.5 rounded hover:bg-gray-200" title={title}>
-      {icon}
-    </button>
-    <div className="absolute z-30 hidden group-hover:flex flex-wrap gap-1 bg-white border border-gray-300 p-2 rounded shadow-lg top-10 left-0 w-48">
-      {colors.map(color => (
-        <button
-          key={color}
-          className="w-6 h-6 rounded-full border border-gray-200"
-          style={{ backgroundColor: color }}
-          onClick={e => { e.preventDefault(); onChange(color); }}
-        />
-      ))}
-    </div>
-  </div>
-);
+ 
 
 /**
  * Araç Çubuğu Bileşeni (Toolbar)
@@ -105,32 +89,28 @@ interface ToolbarProps {
 }
 
 const Toolbar = ({ editor, onStickerButtonClick }: ToolbarProps) => {
-  if (!editor) return null;
-
+  const [showTextColor, setShowTextColor] = useState(false);
+  const [showBgColor, setShowBgColor] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
+  // useCallback burası koşulsuz en üstte olsun:
   const setLink = useCallback(() => {
+    if (!editor) return; // editor yoksa işlemi iptal et
+
     const previousUrl = editor.getAttributes('link').href;
     const url = window.prompt('URL', previousUrl);
 
-    // cancelled
-    if (url === null) {
-      return;
-    }
-
-    // empty
+    if (url === null) return;
     if (url === '') {
       editor.chain().focus().extendMarkRange('link').unsetLink().run();
       return;
     }
-
-    // update link
     editor.chain().focus().extendMarkRange('link').setLink({ href: url }).run();
   }, [editor]);
 
-  const [showTextColor, setShowTextColor] = useState(false);
-  const [showBgColor, setShowBgColor] = useState(false);
+  if (!editor) return null; // renderdan önce kontrol
 
+ 
   return (
     <div className="flex items-center gap-1 p-2 bg-gray-500 border-t md:border-t-0 md:border-b border-gray-200 overflow-x-auto whitespace-nowrap fixed bottom-0 left-0 right-0 z-10 md:relative md:flex-wrap md:mb-3 md:rounded-md">
       {/* Formatlama */}
@@ -231,7 +211,7 @@ interface RichTextEditorProps {
   onStickerButtonClick: () => void;
 }
 
-const RichTextEditorComponent = ({ editor, onUpdate, onStickerButtonClick }: RichTextEditorProps) => {
+const RichTextEditorComponent = ({ editor, onStickerButtonClick }: RichTextEditorProps) => {
   const [showTextColor, setShowTextColor] = useState(false);
   const [showBgColor, setShowBgColor] = useState(false);
   const [imageWidth, setImageWidth] = useState<string>("100%");
