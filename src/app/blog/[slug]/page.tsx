@@ -179,6 +179,13 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
             .ProseMirror img[data-align="right"] { float: right; margin-left: 1rem; }
             .ProseMirror img[data-align="center"] { margin-left: auto; margin-right: auto; }
             .ProseMirror .ProseMirror-selectednode { outline: 3px solid #68CEF8; }
+            /* Başlık boyutları */
+            .ProseMirror h1 { font-size: 2.25rem; font-weight: 700; }
+            .ProseMirror h2 { font-size: 1.75rem; font-weight: 600; }
+            .ProseMirror h3 { font-size: 1.375rem; font-weight: 600; }
+            .ProseMirror h4 { font-size: 1.125rem; font-weight: 600; }
+            .ProseMirror h5 { font-size: 1rem; font-weight: 600; }
+            .ProseMirror h6 { font-size: 0.95rem; font-weight: 600; }
           `}
         </style>        <h1 className="text-3xl md:text-4xl font-bold border-b-2 border-blue-200 py-2 mb-4">{post.title}</h1>
         <div className="flex flex-wrap items-center mb-6 gap-2">

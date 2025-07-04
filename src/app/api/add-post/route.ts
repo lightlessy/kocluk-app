@@ -1,14 +1,27 @@
 import { NextRequest, NextResponse } from 'next/server';
-import fs from 'fs';
-import path from 'path';
+import { initializeApp, getApps } from 'firebase/app';
+import { getFirestore, collection, addDoc, getDocs, query, where } from 'firebase/firestore';
 
-export const runtime = 'nodejs'; // edge değil, çünkü fs kullanılacak
+export const runtime = 'nodejs';
+
+// Firebase config
+const firebaseConfig = {
+  apiKey: 'AIzaSyBJQsiVTSHqJ5VQYnQF56N1E9hjdlw_Cq4',
+  authDomain: 'kocluk-app-f3e63.firebaseapp.com',
+  projectId: 'kocluk-app-f3e63',
+  storageBucket: 'kocluk-app-f3e63.appspot.com',
+  messagingSenderId: '675406832543',
+  appId: '1:675406832543:web:c814a921fdce6f212493aa',
+  measurementId: 'G-8TBPM0NKNP',
+};
+
+// Initialize Firebase app only once
+const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApps()[0];
+const db = getFirestore(app);
 
 export async function POST(req: NextRequest) {
   try {
     const apiKey = req.headers.get('x-api-key');
-    console.log('API Key gelen:', apiKey);
-    console.log('process.env.ADD_POST_API_KEY:', process.env.ADD_POST_API_KEY);
     if (!apiKey || apiKey !== process.env.ADD_POST_API_KEY) {
       return NextResponse.json({ error: 'Geçersiz API anahtarı.' }, { status: 401 });
     }
@@ -27,31 +40,22 @@ export async function POST(req: NextRequest) {
       .replace(/-+/g, '-')
       .replace(/^-+|-+$/g, '');
 
-    // Yazı içeriğini markdown veya html olarak oluştur
-    const fileContent = `---
-title: "${title}"
-imageUrl: "${imageUrl || ''}"
-date: "${new Date().toISOString()}"
-slug: "${slug}"
----
-
-${content}
-`;
-
-    // Yazı dosyasının yolu (örnek: /posts/slug.md)
-      const postsDir = path.join(process.cwd(), 'posts');
-    if (!fs.existsSync(postsDir)) {
-      fs.mkdirSync(postsDir);
-    }
-    const filePath = path.join(postsDir, `${slug}.md`);
-
-    // Eğer dosya zaten varsa hata döndür
-    if (fs.existsSync(filePath)) {
+    // Aynı slug var mı kontrol et
+    const postsRef = collection(db, 'posts');
+    const q = query(postsRef, where('slug', '==', slug));
+    const existing = await getDocs(q);
+    if (!existing.empty) {
       return NextResponse.json({ error: 'Bu başlığa sahip bir yazı zaten mevcut.' }, { status: 409 });
     }
 
-    // Dosyayı yaz
-    fs.writeFileSync(filePath, fileContent);
+    // Firestore'a ekle
+    await addDoc(postsRef, {
+      title,
+      imageUrl: imageUrl || '',
+      content,
+      slug,
+      date: new Date().toISOString(),
+    });
 
     return NextResponse.json({ success: true, message: 'Yazı başarıyla oluşturuldu.', slug }, { status: 201 });
   } catch (e) {

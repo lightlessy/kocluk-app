@@ -500,6 +500,7 @@ export default function App() {
   const [imageUrl, setImageUrl] = useState('');
   const [apiKey, setApiKey] = useState('');
   const [apiKeyError, setApiKeyError] = useState('');
+  const [publishSuccess, setPublishSuccess] = useState(false);
 
   const editor = useEditor({
     extensions: [
@@ -600,6 +601,7 @@ export default function App() {
   // Yayınla butonu için handler
   const handlePublish = async () => {
     setApiKeyError('');
+    setPublishSuccess(false);
     if (!apiKey.trim()) {
       setApiKeyError('API anahtarı zorunludur.');
       return;
@@ -613,7 +615,6 @@ export default function App() {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          // fetch API'de header anahtarları küçük harf olmamalı, string olmalı
           'x-api-key': encodeURIComponent(apiKey),
         } as Record<string, string>,
         body: JSON.stringify({
@@ -627,6 +628,7 @@ export default function App() {
         alert(data?.error || 'Gönderi kaydedilemedi.');
         return;
       }
+      setPublishSuccess(true);
       alert('Gönderi başarıyla yayınlandı!');
       // İsteğe bağlı: Formu temizle
       setTitle('');
@@ -719,13 +721,16 @@ export default function App() {
         </div>
       )}
       {/* Yayınla butonu */}
-      <div className="max-w-4xl mx-auto mt-8 mb-8 flex justify-end">
+      <div className="max-w-4xl mx-auto mt-8 mb-8 flex flex-col items-end">
         <button
           onClick={handlePublish}
           className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded text-lg shadow transition"
         >
           Gönderiyi Yayınla
         </button>
+        {publishSuccess && (
+          <span className="mt-2 text-green-600 font-semibold">Gönderi başarıyla Google Drive'a yüklendi!</span>
+        )}
       </div>
     </div>
   );

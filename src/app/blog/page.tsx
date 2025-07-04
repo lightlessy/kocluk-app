@@ -1,35 +1,62 @@
+"use client";
+
 import Link from 'next/link';
-import fs from 'fs';
-import path from 'path';
-import matter from 'gray-matter';
+import { useEffect, useState } from 'react';
 import './blog.css';
-// app/blog/[slug]/page.tsx gibi dinamik sayfalarda:
+import { initializeApp, getApps } from "firebase/app";
+import { getFirestore, collection, getDocs } from "firebase/firestore";
 
-
-// Helper function to get posts
-const getPosts = () => {
-  const postsDirectory = path.join(process.cwd(), 'posts');
-  const fileNames = fs.readdirSync(postsDirectory);
-
-  const allPostsData = fileNames.map((fileName) => {
-    const slug = fileName.replace(/\.md$/, '');
-    const fullPath = path.join(postsDirectory, fileName);
-    const fileContents = fs.readFileSync(fullPath, 'utf8');
-    const matterResult = matter(fileContents);
-
-    return {
-      slug,
-      ...(matterResult.data as { title: string; date: string; focus?: boolean; author?: string; imageUrl?: string }),
-    };
-  });
-
-  // Sort posts by date
-  return allPostsData.sort((a, b) => (a.date < b.date ? 1 : -1));
+// Firebase config (güvenlik için .env'ye taşıyabilirsiniz)
+const firebaseConfig = {
+  apiKey: "AIzaSyBJQsiVTSHqJ5VQYnQF56N1E9hjdlw_Cq4",
+  authDomain: "kocluk-app-f3e63.firebaseapp.com",
+  projectId: "kocluk-app-f3e63",
+  storageBucket: "kocluk-app-f3e63.appspot.com",
+  messagingSenderId: "675406832543",
+  appId: "1:675406832543:web:c814a921fdce6f212493aa",
+  measurementId: "G-8TBPM0NKNP"
 };
 
+const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApps()[0];
+const db = getFirestore(app);
+
+type Post = {
+  slug: string;
+  title: string;
+  date: string;
+  focus?: boolean;
+  author?: string;
+  imageUrl?: string;
+};
 
 export default function Blog() {
-  const posts = getPosts();
+  const [posts, setPosts] = useState<Post[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    async function fetchPosts() {
+      try {
+        const postsRef = collection(db, 'posts');
+        const snapshot = await getDocs(postsRef);
+        const postList: Post[] = [];
+        snapshot.forEach(doc => {
+          postList.push(doc.data() as Post);
+        });
+        postList.sort((a, b) => (a.date < b.date ? 1 : -1));
+        setPosts(postList);
+        setLoading(false);
+      } catch (err) {
+        setError('Yazılar yüklenemedi. Lütfen daha sonra tekrar deneyin.');
+        setLoading(false);
+      }
+    }
+    fetchPosts();
+  }, []);
+
+  if (loading) return <div className="blog-container">Yükleniyor...</div>;
+  if (error) return <div className="blog-container text-red-500">{error}</div>;
+
   const focusedPost = posts.find(post => post.focus);
   const otherPosts = posts.filter(post => !post.focus);
 
