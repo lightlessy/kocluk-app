@@ -7,8 +7,6 @@ import {
   FiUser, 
   FiMail, 
   FiLock, 
-  FiBookOpen, 
-  FiAward, 
   FiTrendingUp, 
   FiUserPlus,
   FiCheckCircle

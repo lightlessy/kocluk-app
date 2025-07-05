@@ -11,7 +11,6 @@ import {
   FiUser, 
   FiSettings, 
   FiLogOut,
-  FiLogIn,
   FiUserPlus
 } from 'react-icons/fi';
 import './Navbar.css';

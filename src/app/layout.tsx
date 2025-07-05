@@ -6,14 +6,15 @@ import Footer from "./components/Footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
-export const metadata = {
+export const metadata: Metadata = {
   metadataBase: new URL('http://localhost:3000'),
   title: "Koçluk Sitesi",
   description: "Site Açıklaması",
   openGraph: {
-    images: ['/public/verlel.svg'],
+    images: ['/verlel.svg'], // NOT: public/ yazmana gerek yok
   },
 };
+
 
 
 export default function RootLayout({
