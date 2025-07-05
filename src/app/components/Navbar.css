@@ -1,116 +1,300 @@
-/* Navbar Ana Konteyneri */
+/* Navbar.css */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+/* --- Ana Konteyner --- */
 .navbar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 50;
-    padding: 1rem 1.5rem;
-    transition: all 0.3s ease-in-out;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  padding: 1rem 2rem;
+  font-family: 'Inter', sans-serif;
+
+  /* ✅ Sadece buraya yaz transition */
+  transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out, padding 0.3s ease;
 }
 
-/* Sayfa kaydırıldığında Navbar stili */
+.navbar.hidden {
+  transform: translateY(-100%);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.navbar-hide-animate {
+  transform: translateY(-120%);
+  opacity: 0;
+  pointer-events: none;
+  transition: transform 0.7s cubic-bezier(0.4,0,0.2,1), opacity 0.5s cubic-bezier(0.4,0,0.2,1), padding 0.3s;
+}
+
 .navbar.scrolled {
-    background-color: rgba(15, 23, 42, 0.8); /* bg-slate-900/80 */
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-    padding: 0.75rem 1.5rem;
+  background-color: rgba(15, 23, 42, 0.7); /* bg-slate-900/70 */
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  padding: 0.75rem 2rem;
 }
 
 .navbar-content {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    max-width: 1280px; /* max-w-7xl */
-    margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1400px; /* Daha geniş bir konteyner */
+  margin: 0 auto;
 }
 
-/* Logo Stili */
-.logo {
-    font-size: 1.875rem; /* text-3xl */
-    font-weight: 800; /* font-extrabold */
-    color: white;
-    letter-spacing: -0.05em;
-    transition: color 0.3s ease;
+/* --- Logo --- */
+.logo-link {
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: white;
+  letter-spacing: -0.05em;
+  transition: color 0.3s ease;
+  text-decoration: none;
+}
+.logo-link:hover {
+  color: #c7d2fe; /* indigo-200 */
 }
 
-.logo:hover {
-    color: #93c5fd; /* text-blue-300 */
+/* --- Navigasyon Linkleri (Masaüstü) --- */
+.nav-links-desktop {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
 }
 
-/* Masaüstü Navigasyon Linkleri */
 .nav-link {
-    position: relative;
-    font-size: 1rem; /* text-base */
-    font-weight: 600; /* font-semibold */
-    color: #d1d5db; /* text-gray-300 */
-    transition: color 0.3s ease;
+  position: relative;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #d1d5db; /* gray-300 */
+  transition: color 0.3s ease;
+  padding: 0.5rem 0;
 }
-
 .nav-link:hover {
-    color: white;
+  color: white;
 }
-
 .nav-link::after {
-    content: '';
-    position: absolute;
-    width: 0;
-    height: 2px;
-    bottom: -6px;
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: #60a5fa; /* text-blue-400 */
-    transition: width 0.3s ease;
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(90deg, #818cf8, #60a5fa);
+  transition: width 0.4s cubic-bezier(0.2, 1, 0.2, 1);
 }
-
 .nav-link:hover::after,
 .nav-link.active::after {
-    width: 100%;
+  width: 100%;
 }
-
 .nav-link.active {
-    color: white;
+  color: white;
 }
 
-/* Mobil Menü */
-.mobile-menu {
-    position: fixed;
-    top: 0;
-    left: 0;
+/* --- Sağ Taraftaki Butonlar --- */
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.nav-cta-login {
+  font-weight: 600;
+  color: #d1d5db;
+  padding: 0.6rem 1.25rem;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  background-color: transparent;
+}
+.nav-cta-login:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: white;
+}
+
+.nav-cta-signup {
+  font-weight: 600;
+  color: white;
+  padding: 0.6rem 1.25rem;
+  border-radius: 8px;
+  background: linear-gradient(to right, #4f46e5, #6366f1);
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(99, 102, 241, 0.2);
+}
+.nav-cta-signup:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(99, 102, 241, 0.3);
+}
+
+/* --- Profil Menüsü --- */
+.profile-menu-container {
+  position: relative;
+}
+
+.profile-button {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  cursor: pointer;
+}
+
+.profile-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #334155; /* slate-700 */
+  border: 2px solid #4f46e5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  color: white;
+  transition: all 0.3s ease;
+}
+.profile-button:hover .profile-avatar {
+  transform: scale(1.1);
+  box-shadow: 0 0 15px rgba(99, 102, 241, 0.4);
+}
+
+.profile-name {
+  font-weight: 600;
+  color: white;
+}
+
+.profile-dropdown {
+  position: absolute;
+  top: calc(100% + 1rem);
+  right: 0;
+  width: 260px;
+  background-color: #1e293b; /* slate-800 */
+  border-radius: 12px;
+  border: 1px solid #334155; /* slate-700 */
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  padding: 0.5rem;
+  opacity: 0;
+  transform: translateY(10px) scale(0.95);
+  pointer-events: none;
+  transition: all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
+  z-index: 1100;
+}
+
+.profile-dropdown.open {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+
+.dropdown-header {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid #334155;
+}
+.dropdown-header .name {
+  font-weight: 700;
+  color: white;
+  line-height: 1.2;
+}
+.dropdown-header .email {
+  font-size: 0.8rem;
+  color: #94a3b8; /* slate-400 */
+}
+
+.dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  color: #d1d5db;
+  font-weight: 500;
+  transition: background-color 0.2s ease, color 0.2s ease;
+  cursor: pointer;
+  text-decoration: none;
+}
+.dropdown-item:hover {
+  background-color: #334155; /* slate-700 */
+  color: white;
+}
+
+.dropdown-divider {
+  height: 1px;
+  background-color: #334155;
+  margin: 0.5rem;
+}
+
+.logout-button {
+  color: #f87171; /* red-400 */
+}
+.logout-button:hover {
+  background-color: rgba(239, 68, 68, 0.1);
+  color: #ef4444; /* red-500 */
+}
+
+/* --- Mobil Menü --- */
+.mobile-menu-button {
+  color: #e5e7eb; /* gray-200 */
+  z-index: 1200;
+  transition: transform 0.3s ease;
+}
+.mobile-menu-button:hover {
+  transform: scale(1.1);
+}
+
+.mobile-menu-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(15, 23, 42, 0.97);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  opacity: 1;
+  pointer-events: auto;
+  z-index: 999;
+  transition: opacity 0.3s cubic-bezier(0.4,0,0.2,1);
+  padding: 0;
+  display: none;
+}
+.mobile-menu-overlay.open {
+  display: flex;
+  opacity: 1;
+  pointer-events: auto;
+}
+@media (max-width: 768px) {
+  .navbar-content {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
+  .mobile-menu-overlay {
+    padding: 0;
+  }
+  .mobile-nav-link {
+    font-size: 2rem;
+    padding: 0.75rem 0;
     width: 100%;
-    height: 100%;
-    background: rgba(15, 23, 42, 0.95); /* bg-slate-900/95 */
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    opacity: 0;
-    transform: scale(0.95);
-    pointer-events: none;
-    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-}
-
-.mobile-menu.open {
-    opacity: 1;
-    transform: scale(1);
-    pointer-events: auto;
-}
-
-.mobile-nav-link {
-    font-size: 2.25rem; /* text-4xl */
-    font-weight: 700;
-    color: #d1d5db; /* text-gray-300 */
-    padding: 0.5rem 1rem;
-    transition: color 0.3s ease;
-}
-
-.mobile-nav-link.active {
-    color: #93c5fd; /* text-blue-300 */
-}
-.navbar.hide-on-scroll {
-  transform: translateY(-100%);
-  transition: transform 0.3s cubic-bezier(0.4,0,0.2,1);
+    text-align: center;
+  }
+  .mobile-menu-actions {
+    width: 100%;
+    gap: 0.5rem;
+  }
+  .nav-cta-login,
+  .nav-cta-signup {
+    width: 100%;
+    text-align: center;
+    font-size: 1.15rem;
+    padding: 0.9rem 0;
+    border-radius: 10px;
+    display: block;
+  }
+  /* Masaüstü sağ butonları mobilde gizle */
+  .nav-actions {
+    display: none !important;
+  }
+  .profile-avatar {
+    width: 48px;
+    height: 48px;
+    font-size: 1.5rem;
+  }
 }

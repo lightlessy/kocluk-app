@@ -43,7 +43,10 @@ export default function Footer() {
 
   // --- Easter Egg Logic ---
   useEffect(() => {
+      if (typeof window === 'undefined') return;
+
     const handleKeyDown = (e: KeyboardEvent) => {
+      if (!e.key) return;
       const newSequence = (keySequence + e.key.toLowerCase()).slice(-4);
       setKeySequence(newSequence);
       if (newSequence === 'mola') {

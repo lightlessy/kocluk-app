@@ -1,0 +1,243 @@
+/* signup.css */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+/* Genel Konteyner ve Arka Plan */
+.signup-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background-color: #0f172a; /* bg-slate-900 */
+  padding: 1rem;
+  font-family: 'Inter', sans-serif;
+}
+
+/* Form ve Başarı Kartı için Ortak Konteyner */
+.signup-form-container,
+.success-container {
+  width: 100%;
+  max-width: 480px; /* Biraz daha geniş */
+  background: #1e293b; /* bg-slate-800 */
+  border-radius: 16px;
+  padding: 2.5rem;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3), 0 0 40px rgba(99, 102, 241, 0.2);
+  border: 1px solid #334155; /* bg-slate-700 */
+  animation: fadeIn 0.8s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Form Başlığı */
+.form-title {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 800;
+  margin-bottom: 0.5rem;
+  background: linear-gradient(90deg, #a5b4fc, #60a5fa, #6ee7b7);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradient-x 5s ease infinite;
+}
+
+/* Başlık Altı Metin */
+.form-subtitle {
+  text-align: center;
+  color: #94a3b8; /* text-slate-400 */
+  margin-bottom: 2rem;
+}
+
+/* Input Alanları Grubu */
+.input-group {
+  position: relative;
+  margin-bottom: 1.25rem;
+}
+
+/* Input Etiketi */
+.input-label {
+  display: block;
+  color: #cbd5e1; /* text-slate-300 */
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+}
+
+/* Input Alanı ve Select Alanı için Ortak Stiller */
+.input-field,
+.select-field {
+  width: 100%;
+  background-color: #0f172a; /* bg-slate-900 */
+  border: 1px solid #334155; /* border-slate-700 */
+  color: #e2e8f0; /* text-slate-200 */
+  padding: 0.8rem 1rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+.input-field {
+  padding-left: 3rem; /* İkon için boşluk */
+}
+
+.select-field {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%2364748b' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+  background-position: right 0.7rem center;
+  background-repeat: no-repeat;
+  background-size: 1.25em 1.25em;
+  padding-right: 2.5rem;
+}
+
+.input-field::placeholder {
+  color: #64748b; /* placeholder-slate-500 */
+}
+
+.input-field:focus,
+.select-field:focus {
+  outline: none;
+  border-color: #3b82f6; /* focus:border-blue-500 */
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
+}
+
+.input-icon {
+  position: absolute;
+  top: 65%;
+  left: 1rem;
+  transform: translateY(-50%);
+  color: #64748b; /* text-slate-500 */
+  transition: color 0.3s ease;
+}
+
+.input-field:focus + .input-icon {
+  color: #3b82f6;
+}
+
+/* Gönder Butonu */
+.submit-button {
+  width: 100%;
+  margin-top: 1rem;
+  padding: 0.8rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: white;
+  background: linear-gradient(to right, #4f46e5, #6366f1);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.3s ease, background 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.submit-button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 20px rgba(99, 102, 241, 0.4);
+  background: linear-gradient(to right, #6366f1, #4f46e5);
+}
+
+.submit-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Yükleniyor Spineri */
+.loader {
+  border: 2px solid #f3f3f3;
+  border-top: 2px solid #6366f1;
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Hata Mesajı */
+.error-message {
+  background-color: rgba(239, 68, 68, 0.1);
+  color: #f87171;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  text-align: center;
+  margin-top: 1.5rem;
+  font-size: 0.9rem;
+  border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+/* Alternatif Link (Giriş Yap) */
+.alternative-link {
+  text-align: center;
+  margin-top: 1.5rem;
+  color: #94a3b8;
+  font-size: 0.9rem;
+}
+
+.alternative-link a {
+  color: #60a5fa;
+  font-weight: 500;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.alternative-link a:hover {
+  color: #3b82f6;
+  text-decoration: underline;
+}
+
+/* Başarı Ekranı Stilleri */
+.success-container {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.success-icon {
+  width: 80px;
+  height: 80px;
+  color: #34d399; /* emerald-400 */
+  margin-bottom: 1.5rem;
+  animation: popIn 0.5s ease-out;
+}
+
+@keyframes popIn {
+    0% { transform: scale(0.5); opacity: 0; }
+    80% { transform: scale(1.1); }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+.success-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #e2e8f0;
+  margin-bottom: 0.5rem;
+}
+
+.success-text {
+  color: #94a3b8;
+  margin-bottom: 2rem;
+  max-width: 300px;
+}
+
+/* Degrade Animasyonu */
+@keyframes gradient-x {
+  0%, 100% { background-size: 200% 200%; background-position: left center; }
+  50% { background-size: 200% 200%; background-position: right center; }
+}

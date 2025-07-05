@@ -1,0 +1,186 @@
+/* signin.css */
+
+/* Genel Konteyner ve Arka Plan */
+.signin-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background-color: #0f172a; /* bg-slate-900 */
+  padding: 1rem;
+  font-family: 'Inter', sans-serif; /* Modern bir font ailesi */
+}
+
+/* Giriş Formu Konteyneri */
+.signin-form-container {
+  position: relative;
+  width: 100%;
+  max-width: 420px;
+  background: #1e293b; /* bg-slate-800 */
+  border-radius: 16px;
+  padding: 2.5rem;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3), 0 0 40px rgba(59, 130, 246, 0.2);
+  border: 1px solid #334155; /* bg-slate-700 */
+  animation: fadeIn 0.8s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Form Başlığı */
+.form-title {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 800;
+  margin-bottom: 0.5rem;
+  background: linear-gradient(90deg, #a5b4fc, #3b82f6, #6ee7b7); /* from-indigo-300 via-blue-500 to-emerald-300 */
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradient-x 5s ease infinite;
+}
+
+/* Başlık Altı Metin */
+.form-subtitle {
+  text-align: center;
+  color: #94a3b8; /* text-slate-400 */
+  margin-bottom: 2rem;
+}
+
+/* Input Alanları Grubu */
+.input-group {
+  position: relative;
+  margin-bottom: 1.25rem;
+}
+
+/* Input Alanı İkonu */
+.input-icon {
+  position: absolute;
+  top: 50%;
+  left: 1rem;
+  transform: translateY(-50%);
+  color: #64748b; /* text-slate-500 */
+  transition: color 0.3s ease;
+}
+
+/* Input Alanı */
+.input-field {
+  width: 100%;
+  background-color: #0f172a; /* bg-slate-900 */
+  border: 1px solid #334155; /* border-slate-700 */
+  color: #e2e8f0; /* text-slate-200 */
+  padding: 0.8rem 1rem 0.8rem 3rem; /* Sol padding ikona yer açar */
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.input-field::placeholder {
+  color: #64748b; /* placeholder-slate-500 */
+}
+
+.input-field:focus {
+  outline: none;
+  border-color: #3b82f6; /* focus:border-blue-500 */
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
+}
+
+.input-field:focus + .input-icon {
+  color: #3b82f6; /* Odaklanıldığında ikon rengi değişir */
+}
+
+/* Gönder Butonu */
+.submit-button {
+  width: 100%;
+  padding: 0.8rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: white;
+  background: linear-gradient(to right, #2563eb, #3b82f6);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.3s ease, background 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.submit-button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 20px rgba(59, 130, 246, 0.4);
+  background: linear-gradient(to right, #3b82f6, #2563eb);
+}
+
+.submit-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Yükleniyor Spineri */
+.loader {
+  border: 2px solid #f3f3f3;
+  border-top: 2px solid #3b82f6;
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Hata Mesajı */
+.error-message {
+  background-color: rgba(239, 68, 68, 0.1); /* bg-red-500/10 */
+  color: #f87171; /* text-red-400 */
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  text-align: center;
+  margin-top: 1.5rem;
+  font-size: 0.9rem;
+  border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+/* Alternatif Link (Kayıt Ol) */
+.alternative-link {
+  text-align: center;
+  margin-top: 1.5rem;
+  color: #94a3b8; /* text-slate-400 */
+  font-size: 0.9rem;
+}
+
+.alternative-link a {
+  color: #60a5fa; /* text-blue-400 */
+  font-weight: 500;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.alternative-link a:hover {
+  color: #3b82f6; /* hover:text-blue-500 */
+  text-decoration: underline;
+}
+
+/* Degrade Animasyonu */
+@keyframes gradient-x {
+  0%, 100% {
+    background-size: 200% 200%;
+    background-position: left center;
+  }
+  50% {
+    background-size: 200% 200%;
+    background-position: right center;
+  }
+}
