@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@giphy/react-components": "^10.0.1",
+    "@supabase/supabase-js": "^2.50.3",
     "@tailwindcss/postcss": "^4.1.11",
     "@tiptap/extension-color": "^2.24.0",
     "@tiptap/extension-highlight": "^2.24.0",
