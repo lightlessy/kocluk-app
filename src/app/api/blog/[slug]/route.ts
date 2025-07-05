@@ -45,7 +45,7 @@ export async function GET(
         readingTime: Math.ceil(stats.minutes),
       },
     });
-  } catch {
+  } catch{
     return NextResponse.json({ error: 'Sunucu hatası.' }, { status: 500 });
   }
 }
